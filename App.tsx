@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { StatusBar } from 'react-native';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
-import { NearbyScreen } from './src/ui/screens/NearbyScreen';
+import { NearbyContainer } from './src/ui/screens/NearbyContainer';
 import { ReceiveContainer } from './src/ui/screens/ReceiveContainer';
 import { SendContainer } from './src/ui/screens/SendContainer';
 
@@ -17,8 +17,7 @@ export default function App() {
     <SafeAreaProvider>
       <StatusBar barStyle="light-content" />
       {route === 'home' && (
-        <NearbyScreen
-          peers={[]}
+        <NearbyContainer
           onSend={() => setRoute('send')}
           onReceive={() => setRoute('receive')}
         />
