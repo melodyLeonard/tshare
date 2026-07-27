@@ -1,7 +1,7 @@
 import { renderUI } from '@testing/render';
 import { NearbyScreen } from '.';
 
-const handlers = { onSend: jest.fn(), onReceive: jest.fn() };
+const handlers = { onSend: jest.fn(), onReceive: jest.fn(), onPeer: jest.fn() };
 
 describe('NearbyScreen', () => {
   it('offers Send and Receive, and scans when no peers are found', () => {

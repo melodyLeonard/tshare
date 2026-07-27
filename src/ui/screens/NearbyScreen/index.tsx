@@ -7,7 +7,7 @@ import { styles } from './styles';
 import type { NearbyProps } from './types';
 
 // Home: who's nearby, and the two things you can do.
-export function NearbyScreen({ peers, onSend, onReceive }: NearbyProps) {
+export function NearbyScreen({ peers, onSend, onReceive, onPeer }: NearbyProps) {
   return (
     <UI.Screen>
       <View style={styles.header}>
@@ -23,7 +23,7 @@ export function NearbyScreen({ peers, onSend, onReceive }: NearbyProps) {
             hint="Open tshare on another device on the same network."
           />
         ) : (
-          peers.map((peer) => <UI.PeerRow key={peer.id} peer={peer} />)
+          peers.map((peer) => <UI.PeerRow key={peer.id} peer={peer} onPress={onPeer} />)
         )}
       </UI.Panel>
 
