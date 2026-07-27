@@ -7,7 +7,12 @@ type Node = { props: Record<string, unknown> };
 
 const hasText = (node: Node, text: string) => {
   const c = node.props.children;
-  return c === text || (Array.isArray(c) && c.includes(text));
+  if (c === text) {
+    return true;
+  }
+  // Interpolated text renders as an array of parts (strings and numbers); join
+  // them so `Hello {n}` matches "Hello 3".
+  return Array.isArray(c) && (c.includes(text) || c.join('') === text);
 };
 
 export function renderUI(element: ReactElement) {
@@ -23,6 +28,13 @@ export function renderUI(element: ReactElement) {
     },
     queryByText(text: string) {
       return renderer.root.findAll((n) => hasText(n, text))[0] ?? null;
+    },
+    countByTestId(id: string) {
+      // A component and the host view it renders both carry the testID, so count
+      // host instances only (string type) to get one hit per element.
+      return renderer.root.findAll(
+        (n) => n.props.testID === id && typeof (n as { type: unknown }).type === 'string',
+      ).length;
     },
     press(node: { props: Record<string, unknown>; parent: unknown }) {
       // The tapped text usually sits inside a Pressable, so climb to the nearest
