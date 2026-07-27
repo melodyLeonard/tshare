@@ -20,6 +20,7 @@
     "react-native-cross-native": "^0.1.0",
     "react-native-safe-area-context": "^5.5.2",
     "react-native-svg": "^15.15.5",
+    "react-native-tcp-socket": "^6.4.2",
     "react-native-zeroconf": "^0.14.0"
   },
   "devDependencies": {
