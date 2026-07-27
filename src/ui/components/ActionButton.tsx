@@ -4,12 +4,13 @@ import { color, radius, space, type as t } from '../../constants/theme';
 
 interface Props {
   label: string;
-  icon: ReactNode;
+  icon?: ReactNode;
   onPress: () => void;
   variant?: 'primary' | 'outline';
 }
 
-// The two big choices on the home screen: Send and Receive.
+// A full-width action. Used for Send/Receive on the home screen and for the
+// primary action on the flow screens (with or without a leading icon).
 export function ActionButton({ label, icon, onPress, variant = 'primary' }: Props) {
   const primary = variant === 'primary';
   return (
@@ -28,7 +29,6 @@ export function ActionButton({ label, icon, onPress, variant = 'primary' }: Prop
 
 const styles = StyleSheet.create({
   btn: {
-    flex: 1,
     flexDirection: 'row',
     gap: space.sm,
     alignItems: 'center',

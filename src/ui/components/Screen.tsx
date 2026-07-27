@@ -1,11 +1,12 @@
 import type { ReactNode } from 'react';
-import { SafeAreaView, StyleSheet, View } from 'react-native';
+import { StyleSheet, View } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 import { color, space } from '../../constants/theme';
 
-// The dark page every screen sits on, with a consistent gutter.
+// The dark page every screen sits on, inset from the notch and home indicator.
 export function Screen({ children }: { children: ReactNode }) {
   return (
-    <SafeAreaView style={styles.safe}>
+    <SafeAreaView style={styles.safe} edges={['top', 'bottom']}>
       <View style={styles.body}>{children}</View>
     </SafeAreaView>
   );

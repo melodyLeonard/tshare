@@ -1,6 +1,11 @@
 export { ActionButton } from './ActionButton';
+export { ChunkGrid } from './ChunkGrid';
 export { EmptyState } from './EmptyState';
+export { FileCard } from './FileCard';
+export { Header } from './Header';
 export { Panel } from './Panel';
 export { PeerRow } from './PeerRow';
+export { ProgressBar } from './ProgressBar';
 export { Screen } from './Screen';
 export { SectionLabel } from './SectionLabel';
+export { ShareCode } from './ShareCode';
