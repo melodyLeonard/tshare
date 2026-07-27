@@ -56,5 +56,11 @@
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
+	<key>NSLocalNetworkUsageDescription</key>
+	<string>tshare finds nearby devices so you can send and receive files directly, without the cloud.</string>
+	<key>NSBonjourServices</key>
+	<array>
+		<string>_tshare._tcp</string>
+	</array>
 </dict>
 </plist>
