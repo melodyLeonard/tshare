@@ -1,5 +1,5 @@
 import { renderUI } from '@testing/render';
-import { NearbyScreen } from '../NearbyScreen';
+import { NearbyScreen } from '.';
 
 const handlers = { onSend: jest.fn(), onReceive: jest.fn() };
 
