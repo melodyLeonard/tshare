@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { createNativeModule, type NativeModule } from 'react-native-cross-native';
+import { base64ToBytes } from '../lib/base64';
 import WASM from './transfer.rs';
 
 // Loads the Rust transfer core once and hands it back when ready. Hashing and
@@ -14,7 +15,7 @@ export function useTransferCore(): NativeModule | null {
       name: 'transfer',
       source: 'transfer.rs',
       language: 'rust',
-      bytes: WASM,
+      bytes: base64ToBytes(WASM),
     });
     loading.then((module) => live && setCore(module));
 
