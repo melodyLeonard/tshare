@@ -1,0 +1,23 @@
+# Hand-written (not generated): the transfer core pulls in blake3 for hashing.
+# The crate name matches its directory so the build output lands where the
+# bundler looks for it.
+[package]
+name = "native"
+version = "0.1.0"
+edition = "2021"
+publish = false
+
+[lib]
+# cdylib for the WASM build; rlib so `cargo test` can link the crate for
+# host-side unit tests.
+crate-type = ["cdylib", "rlib"]
+path = "transfer.rs"
+
+[dependencies]
+crossnative = { git = "https://github.com/melodyLeonard/cross-native", package = "crossnative", tag = "crossnative-v0.1.0" }
+blake3 = "1"
+
+[profile.release]
+opt-level = 3
+lto = true
+strip = "symbols"
