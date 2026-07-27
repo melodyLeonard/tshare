@@ -1,0 +1,7 @@
+# End-to-end user flow, driven by Maestro on a real device or simulator.
+# Run: maestro test .maestro/smoke.yaml
+# This smoke grows with the UI — it will pick a file, share it, and assert the
+# receiver verifies it. For now it proves the app launches cleanly.
+appId: com.tshare
+---
+- launchApp

@@ -1,0 +1,8 @@
+{
+  "$schema": "https://biomejs.dev/schemas/2.5.5/schema.json",
+  "vcs": {"enabled": true, "clientKind": "git", "useIgnoreFile": true},
+  "files": {"includes": ["src/**/*.ts", "src/**/*.tsx", "App.tsx"]},
+  "linter": {"enabled": true, "rules": {"recommended": true}},
+  "formatter": {"enabled": true, "indentStyle": "space", "indentWidth": 2, "lineWidth": 90},
+  "javascript": {"formatter": {"quoteStyle": "single", "trailingCommas": "all"}}
+}
