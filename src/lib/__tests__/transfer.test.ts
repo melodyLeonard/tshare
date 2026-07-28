@@ -17,12 +17,13 @@ describe('transfer protocol', () => {
     const [server, client] = wirePair();
     serveTransfer(server, manifest(chunks), (i) => chunks[i]);
 
-    const got = await receiveTransfer(
+    const { name, chunks: got } = await receiveTransfer(
       client,
       async (d) => chunks.includes(d),
       () => {},
     );
 
+    expect(name).toBe('f');
     expect([got.get(0), got.get(1), got.get(2)]).toEqual(chunks);
   });
 

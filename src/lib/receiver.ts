@@ -11,14 +11,14 @@ export function receiveTransfer(
   verify: Verify,
   onProgress: (done: number, total: number) => void,
   have: number[] = [],
-): Promise<Map<number, string>> {
+): Promise<{ name: string; chunks: Map<number, string> }> {
   return new Promise((resolve, reject) => {
     let manifest: Manifest | undefined;
     let want = 0;
     const got = new Map<number, string>();
     const finish = () => {
       wire.send({ t: 'done' });
-      resolve(got);
+      resolve({ name: manifest?.name ?? '', chunks: got });
     };
 
     wire.onMessage(async (message) => {

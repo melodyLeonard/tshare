@@ -1,9 +1,10 @@
 import { useEffect, useState } from 'react';
 import type { NativeModule } from 'react-native-cross-native';
 import TcpSocket from 'react-native-tcp-socket';
-import { base64ToBytes } from '../lib/base64';
 import { receiveTransfer } from '../lib/receiver';
 import type { Peer } from '../types';
+import { chunkVerifier } from './chunkVerifier';
+import { saveFile } from './saveFile';
 import { socketWire } from './socketWire';
 
 export interface Receiving {
@@ -11,6 +12,8 @@ export interface Receiving {
   total: number;
   finished: boolean;
   error?: string;
+  name?: string;
+  savedPath?: string;
 }
 
 // Connect to a peer, pull the file it's serving, and verify each chunk with the
@@ -22,20 +25,17 @@ export function useReceiver(peer: Peer, core: NativeModule | null): Receiving {
     if (!core) {
       return;
     }
-    const verify = async (data: string, hash: string) =>
-      (await core.call('verify_chunk', [
-        Array.from(base64ToBytes(data)),
-        hash,
-      ])) as boolean;
-
     const socket = TcpSocket.createConnection(
       { host: peer.host, port: peer.port },
       () => {},
     );
-    receiveTransfer(socketWire(socket), verify, (done, total) =>
+    receiveTransfer(socketWire(socket), chunkVerifier(core), (done, total) =>
       setState((s) => ({ ...s, done, total })),
     )
-      .then(() => setState((s) => ({ ...s, finished: true })))
+      .then(async ({ name, chunks }) => {
+        const savedPath = await saveFile(name, chunks);
+        setState((s) => ({ ...s, finished: true, name, savedPath }));
+      })
       .catch((e: unknown) => setState((s) => ({ ...s, error: String(e) })));
     socket.on('error', (e: unknown) => setState((s) => ({ ...s, error: String(e) })));
 

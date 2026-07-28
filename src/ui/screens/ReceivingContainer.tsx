@@ -17,6 +17,8 @@ export function ReceivingContainer({
   return (
     <ReceivingScreen
       peerName={peer.name}
+      fileName={r.name}
+      savedPath={r.savedPath}
       done={r.done}
       total={r.total}
       finished={r.finished}
