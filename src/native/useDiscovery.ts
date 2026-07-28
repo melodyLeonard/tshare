@@ -23,6 +23,7 @@ export function useDiscovery(name: string, port: number): Peer[] {
     zc.scan(SERVICE_TYPE, 'tcp', 'local.');
 
     return () => {
+      zc.unpublishService(name);
       zc.stop();
       zc.removeDeviceListeners();
     };

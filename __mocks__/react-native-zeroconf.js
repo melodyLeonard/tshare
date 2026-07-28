@@ -4,6 +4,7 @@ class Zeroconf {
   on() {}
   scan() {}
   publishService() {}
+  unpublishService() {}
   stop() {}
   removeDeviceListeners() {}
 }
